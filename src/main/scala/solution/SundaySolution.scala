@@ -9,10 +9,23 @@ object SundaySolution extends App {
 
   val FEBRUARY_LEAP_CAPACITY = 29
 
-  val startYear = 1901
-  val endYear = 2000
+  def prerequisite: Unit = {
+    val startYear = 1900
+    val endYear = 1900
+
+    (startYear to endYear) foreach { year =>
+      MonthsInYear.months.foreach { month =>
+        (1 to month.numberOfDays).foreach(_ => DaysOfWeek.next)
+      }
+    }
+  }
 
   def firstSundays: Int = {
+    val startYear = 1901
+    val endYear = 2000
+
+    prerequisite
+
     (startYear to endYear).flatMap { year =>
       MonthsInYear.months.flatMap { month =>
         (1 to month.numberOfDays).filter { date =>
